@@ -17,11 +17,13 @@
   },
   "homepage": "https://github.com/kurtlocker/side.piece#readme",
   "dependencies": {
+    "async.whilst": "^0.5.2",
+    "cheerio": "^0.22.0",
+    "es6-promise": "^4.0.5",
     "html-escape": "^2.0.0",
     "http": "0.0.0",
     "http-debug": "^0.1.2",
-    "async.whilst": "^0.5.2",
-    "cheerio": "^0.22.0",
+    "json2csv": "^3.7.3",
     "superagent": "^3.3.1"
   }
 }
