@@ -12,6 +12,11 @@
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "html-escape": "^2.0.0",
+    "http": "0.0.0",
+    "http-debug": "^0.1.2"
+  },
   "bugs": {
     "url": "https://github.com/kurtlocker/side.piece/issues"
   },
