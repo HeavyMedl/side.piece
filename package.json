@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/kurtlocker/side.piece/issues"
   },
-  "homepage": "https://github.com/kurtlocker/side.piece#readme"
+  "homepage": "https://github.com/kurtlocker/side.piece#readme",
+  "dependencies": {
+    "async.whilst": "^0.5.2",
+    "cheerio": "^0.22.0",
+    "superagent": "^3.3.1"
+  }
 }
