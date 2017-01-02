@@ -23,15 +23,13 @@ function queryForPrices(options, query) {
 
         return new Promise((resolve,reject) => {
 
-          var r = resolve;
-
           httpGetPromise(element.host + queryPath)
           .then((html) => {
-              //element.priceExtracter(html);
               console.log('Got Results For: ' + element.host + ' Size: ' + html.length);
+              return element.priceExtracter(html);
           })
-          .then(() => {
-              r();
+          .then((productJson) => {
+              resolve();
           })
           .catch((err) => reject('fail'));
 
