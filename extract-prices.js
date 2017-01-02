@@ -1,10 +1,6 @@
-
-var http = require('http-debug').http;
-var escapehtml = require('html-escape');
 var ebayscraper = require('./lib/scrapers/ebay-price-scraper');
+var httpGetPromise = require('./lib/helpers/httpGetPromise');
 var util = require('util');
-
-http.debug = 2;
 
 sites = [
   {name:'Ebay',
@@ -16,29 +12,39 @@ sites = [
 
 function queryForPrices(options, query) {
 
-    var formattedQuery = encodeURIComponent(query);
-    console.log('Formatted Query: ' + formattedQuery);
+      var formattedQuery = encodeURIComponent(query);
+      console.log('Formatted Query: ' + formattedQuery);
 
-    sites.forEach(function(element){
+      var extractPrice = (element) => {
 
-      var queryPath = util.format(element.queryPattern, formattedQuery);
+        var queryPath = util.format(element.queryPattern, formattedQuery);
 
-      console.log('Querying: ' + element.host + ' Path: ' + queryPath);
+        console.log('Querying: ' + element.host + ' Path: ' + queryPath);
 
-      var request = http.get(element.host + queryPath, function (res) {
-      var data = '';
-        res.on('data', function (chunk) {
-          data += chunk;
+        return new Promise((resolve,reject) => {
+
+          var r = resolve;
+
+          httpGetPromise(element.host + queryPath)
+          .then((html) => {
+              //element.priceExtracter(html);
+              console.log('Got Results For: ' + element.host + ' Size: ' + html.length);
+          })
+          .then(() => {
+              r();
+          })
+          .catch((err) => reject('fail'));
+
         });
-        res.on('end', function () {
-          console.log(data);
-        });
-      });
 
-    });
+      }
+
+      var siteQueries = sites.map(extractPrice);
+
+      return Promise.all(siteQueries);
 
 }
 
 console.log('Starting Test Run of Extract Prices');
-queryForPrices(null, 'Wilson Jones Heavy-Duty Round Ring View Binder, 1 inch, White, 4ct');
-console.log('Finishing Run of Extract Prices');
+queryForPrices(null, 'Wilson Jones Heavy-Duty Round Ring View Binder, 1 inch, White, 4ct')
+  .then(function(){console.log('Finishing Run of Extract Prices')});
