@@ -29,6 +29,7 @@ function queryForPrices(options, query) {
               return element.priceExtracter(html);
           })
           .then((productJson) => {
+              console.log('Found the following information: ' + JSON.stringify(productJson));
               resolve();
           })
           .catch((err) => reject('fail'));
