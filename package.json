@@ -22,7 +22,7 @@
     "async.whilst": "^0.5.2",
     "cheerio": "^0.22.0",
     "fast-levenshtein": "^2.0.6",
-    "google-auth-library": "^0.10.0",
+    "google-authorize": "^1.0.0",
     "googleapis": "^16.0.0",
     "html-escape": "^2.0.0",
     "http": "0.0.0",
