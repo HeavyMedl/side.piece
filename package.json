@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sheets": "node lib/google/sheets-api.js",
+    "costco-csv": "cd lib/csv/ && node costco-products-csv.js"
   },
   "repository": {
     "type": "git",
