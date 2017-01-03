@@ -49,3 +49,4 @@ urlcache/*
 .yarn-integrity
 
 .DS_Store
+client_secret.json
