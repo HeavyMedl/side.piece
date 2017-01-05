@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sheets": "node lib/google/sheets-api.js",
+    "sheets": "node lib/google/sheets-client.js",
     "costco-csv": "cd lib/csv/ && node costco-products-csv.js"
   },
   "repository": {
@@ -29,6 +29,7 @@
     "http-debug": "^0.1.2",
     "json2csv": "^3.7.3",
     "levenshtein-damerau": "^0.1.0",
+    "sheets-api": "^1.0.0",
     "superagent": "^3.3.1"
   }
 }
