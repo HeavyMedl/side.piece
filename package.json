@@ -29,7 +29,7 @@
     "http-debug": "^0.1.2",
     "json2csv": "^3.7.3",
     "levenshtein-damerau": "^0.1.0",
-    "sheets-api": "^1.0.1",
+    "sheets-api": "^1.0.2",
     "superagent": "^3.3.1"
   }
 }
