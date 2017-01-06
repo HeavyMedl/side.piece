@@ -21,6 +21,7 @@
   "dependencies": {
     "async.whilst": "^0.5.2",
     "cheerio": "^0.22.0",
+    "fast-csv": "^2.3.0",
     "fast-levenshtein": "^2.0.6",
     "google-authorize": "^1.0.0",
     "googleapis": "^16.0.0",
