@@ -47,11 +47,12 @@ csv.fromPath(`./exports/costco-products.csv`, {headers: true})
 .on("end", () => {
 
   var index = 0;
+  const MAX_ACTIVE_THREADS = 5;
+  var active_threads = 0;
   function next() {
       if (index <= valueArray.length) {
-          debugger;
-          mapResults(valueArray[index++]).then(function(data) {
 
+          mapResults(valueArray[index++]).then(function(data) {
               var columns = (index==1?true:false);
 
               var csvDataString = json2csv({ data: data, hasCSVColumnTitle:columns});
@@ -60,8 +61,17 @@ csv.fromPath(`./exports/costco-products.csv`, {headers: true})
 
               logStream.write(csvDataString);
               logStream.write('\n');
+              active_threads--;
               next();
           });
+
+          console.log('==== PROMISE NUMBER ===== : ' + active_threads);
+
+          if(active_threads < MAX_ACTIVE_THREADS){
+             active_threads++;
+             next();
+          }
+
       } else {
           logStream.end();
           resolve(results);
