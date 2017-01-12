@@ -8,7 +8,9 @@
     "sheets": "node lib/google/sheets-client.js",
     "costco-csv": "cd lib/csv/ && node costco-products-csv.js",
     "test-extract-prices":"node lib/helpers/extract-prices.js",
-    "clear-urlcache":"rm -r ./lib/helpers/urlcache/*"
+    "clear-urlcache":"rm -r ./urlcache/*",
+    "aggregate":"node batch/aggregate-prices.js",
+    "debug-aggregate":"node --inspect --debug-brk batch/aggregate-prices.js"
   },
   "repository": {
     "type": "git",
