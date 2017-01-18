@@ -7,10 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "sheets": "node lib/google/main.js",
     "costco-csv": "cd lib/csv/ && node costco-products-csv.js",
-    "test-extract-prices":"node lib/helpers/extract-prices.js",
-    "clear-urlcache":"rm -r ./urlcache/*",
-    "aggregate":"node batch/aggregate-prices.js",
-    "debug-aggregate":"node --inspect --debug-brk batch/aggregate-prices.js"
+    "test-extract-prices": "node lib/helpers/extract-prices.js",
+    "clear-urlcache": "rm -r ./urlcache/*",
+    "aggregate": "node batch/aggregate-prices.js",
+    "debug-aggregate": "node --inspect --debug-brk batch/aggregate-prices.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/kurtlocker/side.piece#readme",
   "dependencies": {
+    "async-each-series": "^1.1.0",
     "async.whilst": "^0.5.2",
+    "chalk": "^1.1.3",
     "cheerio": "^0.22.0",
     "fast-csv": "^2.3.0",
     "fast-levenshtein": "^2.0.6",
