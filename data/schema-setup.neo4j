@@ -10,7 +10,36 @@ create (a:Item{name:'First Item'}) return a
 CREATE CONSTRAINT ON (site:Site) ASSERT site.name IS UNIQUE
 CREATE CONSTRAINT ON (item:Item) ASSERT item.name IS UNIQUE
 
--- Create a Sample Selling Relationship
+-- Create a Sample Selling Relationships
 merge(a:Site{name:'Costco'})
 merge(b:Item{name:'First Item'})
-merge(a)-[r:Sells{price:100.00}]->(b) return a,b,r;
+merge(a)-[r:Sells{price:100.00,stdev:50,created:TIMESTAMP()}]->(b) return r;
+
+merge(a:Site{name:'Amazon'})
+merge(b:Item{name:'First Item'})
+merge(a)-[r:Sells{price:150.00,stdev:25,created:TIMESTAMP()}]->(b) return r;
+
+merge(a:Site{name:'Ebay'})
+merge(b:Item{name:'Second Item'})
+merge(a)-[r:Sells{price:200.00,stdev:50,created:TIMESTAMP()}]->(b) return r;
+
+merge(a:Site{name:'Amazon'})
+merge(b:Item{name:'Second Item'})
+merge(a)-[r:Sells{price:10.00,stdev:25,created:TIMESTAMP()}]->(b) return r;
+
+-- Remove all Selling Relationships
+match ()-[r:Sells]->() delete r;
+
+-- Get a list of all items and selling relationships
+match()-[r:Sells]->(a:Item) return a,r;
+
+-- Discover the max and min for an item along with the stores it was found at
+match()-[r:Sells]->(a:Item)
+where toFloat(r.price) is not null
+with max(toFloat(r.price)) as max, min(toFloat(r.price)) as min, a
+match(a)<-[r:Sells]-(b)
+where r.price = max
+with max, min, a, b.name as maxName
+match(a)<-[r:Sells]-(b)
+where r.price = min
+return max, min, a.name, maxName, b.name as minName

@@ -67,7 +67,7 @@ csv.fromPath(`./exports/costco-products.csv`, {
 										amazonPrice.create(data.AmazonPrice,data.AmazonStDev);
 										return data;
 									}).
-									then(()=>{
+									then((data)=>{
 										next();
 									})
 									console.log(data);
@@ -81,6 +81,10 @@ csv.fromPath(`./exports/costco-products.csv`, {
 
 			}
 		}
-		// start first iteration
+		// Don't need to make this so difficult, just add more next statements to increase the threading
+		next();
+		next();
+		next();
+		next();
 		next();
 	})
