@@ -1,0 +1,16 @@
+-- Create Sample Sites
+create (a:Site{name:'Amazon'}) return a
+create (a:Site{name:'Ebay'}) return a
+create (a:Site{name:'Costco'}) return a
+
+-- Create a sample Item
+create (a:Item{name:'First Item'}) return a
+
+-- Create Constraints on Entities
+CREATE CONSTRAINT ON (site:Site) ASSERT site.name IS UNIQUE
+CREATE CONSTRAINT ON (item:Item) ASSERT item.name IS UNIQUE
+
+-- Create a Sample Selling Relationship
+merge(a:Site{name:'Costco'})
+merge(b:Item{name:'First Item'})
+merge(a)-[r:Sells{price:100.00}]->(b) return a,b,r;

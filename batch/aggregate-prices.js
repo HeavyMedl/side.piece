@@ -25,13 +25,11 @@ function mapResults(value) {
 			console.log('Error mapping Price Extract Result' + error);
 		});
 }
-// Clear the File
-var fs = require('fs');
-var logStream = fs.createWriteStream('./exports/aggregate-products.csv', {
-	'flags': 'w'
-});
+
 // use {'flags': 'a'} to append and {'flags': 'w'} to erase and write a new file
 var valueArray = [];
+
+var Price = require('../data/price.js');
 // Process the Costco Products File
 csv.fromPath(`./exports/costco-products.csv`, {
 		headers: true
@@ -41,32 +39,46 @@ csv.fromPath(`./exports/costco-products.csv`, {
 	})
 	.on("end", () => {
 		var index = 0;
-		const MAX_ACTIVE_THREADS = 5;
-		var active_threads = 0;
 
 		function next() {
 			if (index <= valueArray.length) {
-				mapResults(valueArray[index++])
-					.then(function(data) {
-						var columns = (index == 1 ? true : false);
-						var csvDataString = json2csv({
-							data: data,
-							hasCSVColumnTitle: columns
-						});
-						console.log(csvDataString);
-						logStream.write(csvDataString);
-						logStream.write('\n');
-						active_threads--;
-						next();
-					});
-				console.log('==== PROMISE NUMBER ===== : ' + active_threads);
-				if (active_threads < MAX_ACTIVE_THREADS) {
-					active_threads++;
-					next();
-				}
-			} else {
-				logStream.end();
-				resolve(results);
+
+				var value = valueArray[index++];
+
+				var price = new Price('Costco', value.Name);
+				price.exists().then(
+
+					function(exists){
+
+						if(!exists){
+								mapResults(value).
+								  then(function(data) {
+										var costcoPrice = new Price('Costco',value.Name);
+										costcoPrice.create(data.CostcoPrice,0);
+										return data;
+									}).
+									then((data)=>{
+										var ebayPrice = new Price('Ebay',value.Name);
+										ebayPrice.create(data.EbayPrice,data.EbayStDev);
+										return data;
+									}).
+									then((data)=>{
+										var amazonPrice = new Price('Amazon',value.Name);
+										amazonPrice.create(data.AmazonPrice,data.AmazonStDev);
+										return data;
+									}).
+									then(()=>{
+										next();
+									})
+									console.log(data);
+						}else{
+								console.log('Already Extracted Prices for : ' + value.Name)
+								next();
+						}
+
+					}
+				)
+
 			}
 		}
 		// start first iteration

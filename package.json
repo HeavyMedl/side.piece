@@ -10,7 +10,8 @@
     "test-extract-prices": "node lib/helpers/extract-prices.js",
     "clear-urlcache": "rm -r ./urlcache/*",
     "aggregate": "node batch/aggregate-prices.js",
-    "debug-aggregate": "node --inspect --debug-brk batch/aggregate-prices.js"
+    "debug-aggregate": "node --inspect --debug-brk batch/aggregate-prices.js",
+    "create-test-price": "node data/price.js"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "http-debug": "^0.1.2",
     "json2csv": "^3.7.3",
     "levenshtein-damerau": "^0.1.0",
+    "neo4j-driver": "^1.1.0",
     "sheets-api": "^1.0.5",
     "stats-lite": "^2.0.3",
     "superagent": "^3.3.1"
