@@ -1,0 +1,23 @@
+{
+  "ebay": {
+    "name": "EBAY",
+    "protocol": "http://",
+    "host": "www.ebay.com",
+    "path": "/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR0.TRC0.H0.X.TRS2&_nkw=_keywords_&_sacat=0",
+    "headers": {}
+  },
+  "amazon": {
+    "name": "AMAZON",
+    "protocol": "https://",
+    "host": "www.amazon.com",
+    "path": "/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=_keywords_",
+    "headers": {
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "Accept-Encoding": "utf-8",
+      "Accept-Language": "en-US,en;q=0.8,en-GB;q=0.6,fr;q=0.4",
+      "Host": "www.amazon.com",
+      "Upgrade-Insecure-Requests": "1",
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36"
+    }
+  }
+}

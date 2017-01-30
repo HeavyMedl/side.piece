@@ -1,0 +1,7 @@
+{
+  "logger_level": {
+    "sheets_client": "info",
+    "ebay_scraper": "info",
+    "amazon_scraper": "info"
+  }
+}
